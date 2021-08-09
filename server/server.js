@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 8080;
 const db = require("./DB/index");
 const express = require("express");
 const cors = require("cors");
+const path = require("path")
 // const mongodbClient = require("mongodb").mongoClient;
 const connections = require("./DB");
 const app = express();
@@ -24,3 +25,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/Students", studentRouter);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.get('*', (req, res) => {
+    res, sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
