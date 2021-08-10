@@ -21,7 +21,7 @@ app.listen(PORT, () => {
 });
 
 
-app.use("/Students", studentRouter);
+app.use("/students", studentRouter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
