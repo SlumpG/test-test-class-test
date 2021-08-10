@@ -20,9 +20,6 @@ app.listen(PORT, () => {
   console.log(`server live on port: ${PORT}`);
 });
 
-app.get("/", (req, res) => {
-  res.send("server live on port: 8080");
-});
 
 app.use("/Students", studentRouter);
 
