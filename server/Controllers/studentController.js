@@ -1,4 +1,8 @@
 const studentModel = require("../Models/studentModels");
+const validateData = require('../Validation/validator')
+
+
+
 /////////////////getAll////////////////////////////////
 async function getAllStudent(req, res) {
   try {
@@ -12,6 +16,10 @@ async function getAllStudent(req, res) {
 }
 /////////////////////////////add////////////////////////////////
 async function createNewStudent(req, res) {
+  const {errors, isValid} = validateData(req.body.students)
+  if(!isValid){
+    return res.status(403).send(errors)
+  }
   try {
     await studentModel.insertMany(req.body.students, (error, result) => {
       if (error) throw error;
